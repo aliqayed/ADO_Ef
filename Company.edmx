@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SchoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DepartmentS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="EmployeeS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="DepartmentsID" Type="int" />
+        </EntityType>
+        <Association Name="FK_EmployeeS_DepartmentS_DepartmentsID">
+          <End Role="DepartmentS" Type="Self.DepartmentS" Multiplicity="0..1" />
+          <End Role="EmployeeS" Type="Self.EmployeeS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepartmentS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmployeeS">
+              <PropertyRef Name="DepartmentsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SchoolModelStoreContainer">
+          <EntitySet Name="DepartmentS" EntityType="Self.DepartmentS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeS" EntityType="Self.EmployeeS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EmployeeS_DepartmentS_DepartmentsID" Association="Self.FK_EmployeeS_DepartmentS_DepartmentsID">
+            <End Role="DepartmentS" EntitySet="DepartmentS" />
+            <End Role="EmployeeS" EntitySet="EmployeeS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EmployeeS" Relationship="Self.FK_EmployeeS_DepartmentS_DepartmentsID" FromRole="DepartmentS" ToRole="EmployeeS" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentsID" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_EmployeeS_DepartmentS_DepartmentsID" FromRole="EmployeeS" ToRole="DepartmentS" />
+        </EntityType>
+        <Association Name="FK_EmployeeS_DepartmentS_DepartmentsID">
+          <End Role="DepartmentS" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="EmployeeS" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DepartmentS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EmployeeS">
+              <PropertyRef Name="DepartmentsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SchoolEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DepartmentS" EntityType="Self.Department" />
+          <EntitySet Name="EmployeeS" EntityType="Self.Employee" />
+          <AssociationSet Name="FK_EmployeeS_DepartmentS_DepartmentsID" Association="Self.FK_EmployeeS_DepartmentS_DepartmentsID">
+            <End Role="DepartmentS" EntitySet="DepartmentS" />
+            <End Role="EmployeeS" EntitySet="EmployeeS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer" CdmEntityContainer="SchoolEntities">
+          <EntitySetMapping Name="DepartmentS">
+            <EntityTypeMapping TypeName="SchoolModel.Department">
+              <MappingFragment StoreEntitySet="DepartmentS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeS">
+            <EntityTypeMapping TypeName="SchoolModel.Employee">
+              <MappingFragment StoreEntitySet="EmployeeS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepartmentsID" ColumnName="DepartmentsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

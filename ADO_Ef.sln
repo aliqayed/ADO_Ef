@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35828.75 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADO_Ef", "ADO_Ef.csproj", "{BCC94695-0939-4AF8-9750-FAF852ED974C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCC94695-0939-4AF8-9750-FAF852ED974C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCC94695-0939-4AF8-9750-FAF852ED974C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCC94695-0939-4AF8-9750-FAF852ED974C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCC94695-0939-4AF8-9750-FAF852ED974C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3CD65A54-5BE6-4D6F-8B3D-7CA421BC9279}
+	EndGlobalSection
+EndGlobal
